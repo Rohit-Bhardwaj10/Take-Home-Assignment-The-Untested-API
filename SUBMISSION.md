@@ -1,5 +1,33 @@
 # Submission Notes
 
+## Live API
+
+**Base URL:** `https://task-api-XXXX.onrender.com`
+> *(replace `XXXX` with the actual subdomain after deploying on Render)*
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | Health check |
+| `/tasks` | GET | List all tasks |
+| `/tasks?status=todo` | GET | Filter by status |
+| `/tasks?page=1&limit=5` | GET | Paginated results |
+| `/tasks` | POST | Create a task |
+| `/tasks/:id` | PUT | Update a task |
+| `/tasks/:id` | DELETE | Delete a task |
+| `/tasks/:id/complete` | PATCH | Mark complete |
+| `/tasks/:id/assign` | PATCH | Assign a task |
+| `/tasks/stats` | GET | Task statistics |
+
+**Quick test (no auth needed):**
+```bash
+curl https://task-api-XXXX.onrender.com/tasks
+```
+
+> **Note:** Render free tier spins down after 15 min of inactivity. First request may take ~30 s to wake up.
+
+---
+
+
 ## What was done
 
 ### Day 1 - Tests
