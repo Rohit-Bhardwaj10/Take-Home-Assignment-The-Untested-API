@@ -18,7 +18,30 @@
 | `/tasks/stats` | GET | Task statistics |
 
 **Quick test (no auth needed):**
+
 ```bash
+# Create a task
+curl -X POST https://take-home-assignment-the-untested-api-z4jp.onrender.com/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Test task","priority":"high"}'
+```
+
+**Response:**
+```json
+{
+  "id": "0822dab9-7bf3-49a5-806d-dd2b9349d8a0",
+  "title": "Test task",
+  "description": "",
+  "status": "todo",
+  "priority": "high",
+  "dueDate": null,
+  "completedAt": null,
+  "createdAt": "2026-08-15T22:40:07.567Z"
+}
+```
+
+```bash
+# List all tasks
 curl https://take-home-assignment-the-untested-api-z4jp.onrender.com/tasks
 ```
 
