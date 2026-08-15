@@ -31,6 +31,15 @@ The uncovered lines are intentional non-testable code:
 
 ---
 
+## Feature Design Decisions — `PATCH /tasks/:id/assign`
+
+- **Separate `PATCH` endpoint over reusing `PUT /tasks/:id`**: A dedicated route makes the intent explicit and avoids the risk of accidentally overwriting other fields (title, priority, status) when all the caller wants to do is assign. It also mirrors the existing `PATCH /:id/complete` pattern already in the codebase.
+- **`assignee` as a trimmed, non-empty string**: No user store exists to validate against, so a free-text string is the pragmatic choice. `.trim()` is applied before saving so `"alice"` and `" alice "` don't create duplicates — a small guard without over-engineering. The trade-off (case sensitivity, no canonical list) is noted as a production question.
+- **`400` for missing or blank `assignee`**: Two separate validation checks — one for `undefined`/`null` (field absent entirely) and one for empty string after trimming — give callers a specific, actionable error rather than a silent no-op or a vague 500.
+- **`404` for a non-existent task**: Returns 404 rather than silently ignoring the request, so clients can distinguish "task doesn't exist" from "assignment succeeded". Consistent with how `PUT`, `DELETE`, and `PATCH /complete` all handle missing tasks.
+
+---
+
 ## What I'd test next if I had more time
 
 - **Concurrent writes** - the in-memory store is a plain array with no locking. If two requests hit `create` or `remove` simultaneously in a real async environment, there's a race condition risk. Worth testing even now to document the limitation.
