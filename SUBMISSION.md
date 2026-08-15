@@ -2,8 +2,7 @@
 
 ## Live API
 
-**Base URL:** `https://task-api-XXXX.onrender.com`
-> *(replace `XXXX` with the actual subdomain after deploying on Render)*
+**Base URL:** `https://take-home-assignment-the-untested-api-z4jp.onrender.com`
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -20,10 +19,11 @@
 
 **Quick test (no auth needed):**
 ```bash
-curl https://task-api-XXXX.onrender.com/tasks
+curl https://take-home-assignment-the-untested-api-z4jp.onrender.com/tasks
 ```
 
 > **Note:** Render free tier spins down after 15 min of inactivity. First request may take ~30 s to wake up.
+
 
 ---
 
